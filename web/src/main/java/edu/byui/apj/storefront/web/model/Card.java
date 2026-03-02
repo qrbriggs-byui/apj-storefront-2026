@@ -1,20 +1,28 @@
 package edu.byui.apj.storefront.web.model;
 
-public class Card {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
+/**
+ * Card model matching the CSV header exactly:
+ * ID,Name,Specialty,Contribution,Price,ImageUrl
+ *
+ * We use Lombok to reduce boilerplate (@Data, @NoArgsConstructor, @AllArgsConstructor).
+ *
+ * Note: field names are conventional Java names and will be serialized to JSON
+ * by Jackson when returned from controllers.
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Card {
+    private Long id;
     private String name;
     private String specialty;
-
-    public Card(String name, String specialty) {
-        this.name = name;
-        this.specialty = specialty;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSpecialty() {
-        return specialty;
-    }
+    private String contribution;
+    private BigDecimal price;
+    private String imageUrl;
 }

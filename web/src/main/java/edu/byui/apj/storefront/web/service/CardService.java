@@ -2,6 +2,8 @@ package edu.byui.apj.storefront.web.service;
 
 import edu.byui.apj.storefront.web.data.CsvCardRepository;
 import edu.byui.apj.storefront.web.model.Card;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +11,9 @@ import java.util.Optional;
 
 @Service
 public class CardService {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(CardService.class);
 
     private final CsvCardRepository repo;
 
@@ -19,14 +24,17 @@ public class CardService {
     public List<Card> getFeaturedCards(String q) {
         // if q is null or empty, default to "Java" for featured cards
         String effective = (q == null || q.isBlank()) ? "Java " : q;
+        logger.debug("Fetching featured cards with query: {}", effective);
         return repo.search(effective);
     }
 
     public List<Card> getAll() {
+        logger.debug("Fetching all cards");
         return repo.findAll();
     }
 
     public Optional<Card> getById(Long id) {
+        logger.debug("Fetching cards by id {}", id);
         return repo.findById(id);
     }
 }

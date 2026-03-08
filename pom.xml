@@ -51,5 +51,8 @@
             </plugin>
         </plugins>
     </build>
-
+    <modules>
+        <module>web</module>
+        <module>api</module>
+    </modules>
 </project>

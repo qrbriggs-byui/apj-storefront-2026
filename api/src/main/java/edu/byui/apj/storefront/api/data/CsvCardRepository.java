@@ -1,11 +1,11 @@
-package edu.byui.apj.storefront.web.data;
+package edu.byui.apj.storefront.api.data;
 
 import com.opencsv.CSVReader;
-import edu.byui.apj.storefront.web.model.Card;
+import edu.byui.apj.storefront.api.model.Card;
+import jakarta.annotation.PostConstruct;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
-import jakarta.annotation.PostConstruct;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 
 /**
  * Loads cards from classpath resource data/pioneers.csv into memory on startup.
- *
+ * <p>
  * Important:
  * - This loader expects the CSV header to contain EXACT names (case-sensitive):
- *   "ID","Name","Specialty","Contribution","Price","ImageUrl"
+ * "ID","Name","Specialty","Contribution","Price","ImageUrl"
  * - If column names differ, update the CSV or this mapping.
- *
+ * <p>
  * Educational: this demonstrates loading resources from classpath and mapping CSV
  * rows into POJOs. Keep this simple for the tutorial (in-memory, read-only).
  */
@@ -59,11 +59,11 @@ public class CsvCardRepository {
                 String[] row;
                 while ((row = csv.readNext()) != null) {
                     // Safely read columns by their exact header names
-                    Long id = parseLongSafe( getValue(row, headerIndex, "ID") );
+                    Long id = parseLongSafe(getValue(row, headerIndex, "ID"));
                     String name = getValue(row, headerIndex, "Name");
                     String specialty = getValue(row, headerIndex, "Specialty");
                     String contribution = getValue(row, headerIndex, "Contribution");
-                    BigDecimal price = parseBigDecimalSafe( getValue(row, headerIndex, "Price") );
+                    BigDecimal price = parseBigDecimalSafe(getValue(row, headerIndex, "Price"));
                     String imageUrl = getValue(row, headerIndex, "ImageUrl");
 
                     Card c = new Card(id, name, specialty, contribution, price, imageUrl);
@@ -75,7 +75,7 @@ public class CsvCardRepository {
         }
     }
 
-    private String getValue(String[] row, Map<String,Integer> headerIndex, String key) {
+    private String getValue(String[] row, Map<String, Integer> headerIndex, String key) {
         Integer i = headerIndex.get(key);
         if (i == null || i >= row.length) return null;
         String s = row[i];
@@ -84,8 +84,11 @@ public class CsvCardRepository {
 
     private Long parseLongSafe(String s) {
         if (s == null) return null;
-        try { return Long.parseLong(s.replaceAll("[^0-9]", "")); }
-        catch (Exception e) { return null; }
+        try {
+            return Long.parseLong(s.replaceAll("[^0-9]", ""));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private BigDecimal parseBigDecimalSafe(String s) {

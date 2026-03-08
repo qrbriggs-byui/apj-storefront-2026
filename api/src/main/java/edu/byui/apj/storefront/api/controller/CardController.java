@@ -1,7 +1,7 @@
-package edu.byui.apj.storefront.web.controller;
+package edu.byui.apj.storefront.api.controller;
 
-import edu.byui.apj.storefront.web.model.Card;
-import edu.byui.apj.storefront.web.service.CardService;
+import edu.byui.apj.storefront.api.model.Card;
+import edu.byui.apj.storefront.api.service.CardService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class CardController {
 
     /**
      * Returns featured cards.
-     *
+     * <p>
      * If q is omitted, defaults to "Java".
      */
     @Operation(
@@ -47,7 +47,7 @@ public class CardController {
      * Returns all cards.
      */
     @Operation(summary = "Gets a single card by ID",
-               description = "Returns a card by ID. Returns a 404 error if the specified card is not found.")
+            description = "Returns a card by ID. Returns a 404 error if the specified card is not found.")
     @GetMapping("/{id}")
     public ResponseEntity<Card> byId(@PathVariable Long id) {
         return service.getById(id)

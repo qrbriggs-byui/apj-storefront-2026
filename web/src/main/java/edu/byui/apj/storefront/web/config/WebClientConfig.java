@@ -12,7 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
-    @Value("${card.api.base-url:http://localhost:8081}")
+    @Value("${card.api.base-url}")
     private String cardApiBaseUrl;
 
     @Bean

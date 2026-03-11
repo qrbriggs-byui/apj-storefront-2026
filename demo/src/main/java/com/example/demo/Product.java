@@ -1,9 +1,9 @@
 package com.example.demo;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -17,4 +17,9 @@ public class Product {
     String description;
     Double price;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    List<PriceChange> priceChanges;
+
+    @ManyToMany(mappedBy = "products")
+    List<Order> orders;
 }

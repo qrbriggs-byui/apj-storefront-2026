@@ -16,7 +16,7 @@ public class PriceChange {
     private Double oldPrice;
     private Date changeDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Product product;
 
 }

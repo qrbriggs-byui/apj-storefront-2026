@@ -21,4 +21,14 @@ public class WebClientConfig {
                 .baseUrl(cardApiBaseUrl)
                 .build();
     }
+
+    @Value("${mongo.api.base-url}")
+    private String mongoApiBaseUrl;
+
+    @Bean
+    public WebClient tradingCardClient() {
+        return WebClient.builder()
+                .baseUrl(mongoApiBaseUrl)
+                .build();
+    }
 }

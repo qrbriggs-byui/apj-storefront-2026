@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -15,6 +12,7 @@ public class Payment {
 
     private String transactionIdentifier;
 
+    @Column(name="foo")
     private String paymentType;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -3,6 +3,7 @@ package edu.byui.apj.storefront.web.service;
 import edu.byui.apj.storefront.web.model.Card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -26,7 +27,7 @@ public class WebCardService {
 
     private final WebClient client;
 
-    public WebCardService(WebClient cardApiClient) {
+    public WebCardService(@Qualifier("cardApiClient") WebClient cardApiClient) {
         this.client = cardApiClient;
     }
 

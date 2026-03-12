@@ -1,5 +1,5 @@
 // product-listing.js
-// Fetch all products from /api/cards, optionally filter by q (from querystring),
+// Fetch products from /api/trading-cards (or /api/trading-cards/search when q is set),
 // and display client-side pagination with 20 items per page and 5 cards per row.
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -46,7 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     async function fetchAll() {
-        const resp = await fetch('/api/cards', { headers: { 'Accept': 'application/json' }});
+        const url = q
+            ? `/api/trading-cards/search?query=${encodeURIComponent(q)}`
+            : '/api/trading-cards?page=0&size=500';
+        const resp = await fetch(url, { headers: { 'Accept': 'application/json' }});
         if (!resp.ok) {
             const text = await resp.text().catch(()=>null);
             throw new Error(`HTTP ${resp.status} ${resp.statusText} ${text ? '- ' + text : ''}`);

@@ -44,6 +44,12 @@ public class TradingCardController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @Operation(summary = "List distinct specialties", description = "Returns all distinct specialty values from trading cards.")
+    @GetMapping("/specialties")
+    public List<String> getSpecialties() {
+        return tradingCardService.getDistinctSpecialties();
+    }
+
     @Operation(summary = "Filter by specialty", description = "Returns trading cards matching the given specialty.")
     @GetMapping("/filter/specialty")
     public List<TradingCard> filterBySpecialty(@RequestParam String specialty) {

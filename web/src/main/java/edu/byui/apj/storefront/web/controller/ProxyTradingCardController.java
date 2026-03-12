@@ -34,6 +34,11 @@ public class ProxyTradingCardController {
         return tradingCardService.getFeatured(q);
     }
 
+    @GetMapping("/specialties")
+    public List<String> getSpecialties() {
+        return tradingCardService.getSpecialties();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<TradingCardDTO> getById(@PathVariable String id) {
         return tradingCardService.getById(id)

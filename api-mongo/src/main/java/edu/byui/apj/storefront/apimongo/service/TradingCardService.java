@@ -5,20 +5,34 @@ import edu.byui.apj.storefront.apimongo.repository.TradingCardRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class TradingCardService {
 
     private final TradingCardRepository repository;
+    private final MongoTemplate mongoTemplate;
 
-    public TradingCardService(TradingCardRepository repository) {
+    public TradingCardService(TradingCardRepository repository, MongoTemplate mongoTemplate) {
         this.repository = repository;
+        this.mongoTemplate = mongoTemplate;
+    }
+
+    public List<String> getDistinctSpecialties() {
+        List<String> raw = mongoTemplate.findDistinct(new Query(), "Specialty", TradingCard.class, String.class);
+        return raw.stream()
+                .filter(s -> s != null && !s.isBlank())
+                .sorted(String.CASE_INSENSITIVE_ORDER)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     public List<TradingCard> findAll(String sort, int page, int size) {

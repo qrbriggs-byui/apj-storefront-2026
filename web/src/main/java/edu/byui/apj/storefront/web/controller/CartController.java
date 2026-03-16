@@ -27,11 +27,6 @@ public class CartController {
         return "redirect:/cart.html";
     }
 
-    @GetMapping("/checkout")
-    public String checkoutPage() {
-        return "redirect:/checkout.html";
-    }
-
     @GetMapping("/api/cart")
     @ResponseBody
     public ResponseEntity<CartDTO> getCart(HttpSession session) {

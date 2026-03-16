@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="cart.css" />
 </head>
 <body>
 <header class="site-header">
@@ -35,17 +36,55 @@
     </div>
 </header>
 
-<main class="main">
-    <section class="hero">
+<main class="main cart-main">
+    <section class="cart-area">
         <h2>Checkout</h2>
-        <p class="lead">Checkout functionality has not been implemented yet.</p>
-        <p>This page will eventually support:</p>
-        <ul>
-            <li>Shipping information</li>
-            <li>Payment</li>
-            <li>Order confirmation</li>
-        </ul>
-        <p><a href="cart.html" class="nav-link">← Back to cart</a></p>
+        <div id="checkoutStatus" class="status">Loading cart…</div>
+        <div id="checkoutContent" class="cart-content" hidden>
+            <p class="checkout-summary-title">Cart summary</p>
+            <table class="cart-table" aria-label="Cart summary">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="checkoutTableBody"></tbody>
+            </table>
+            <p id="checkoutTotal" class="cart-total" style="margin:12px 0 0 0;">Total: $0.00</p>
+
+            <form id="placeOrderForm" action="/checkout" method="post" class="checkout-form">
+                <h3 class="checkout-section-title">Customer &amp; shipping</h3>
+                <div class="checkout-fields">
+                    <label for="customerName">Name</label>
+                    <input type="text" id="customerName" name="customerName" class="checkout-input" autocomplete="name" />
+                    <label for="customerEmail">Email</label>
+                    <input type="email" id="customerEmail" name="customerEmail" class="checkout-input" autocomplete="email" />
+                    <label for="shippingAddressLine1">Address line 1</label>
+                    <input type="text" id="shippingAddressLine1" name="shippingAddressLine1" class="checkout-input" autocomplete="street-address-line1" />
+                    <label for="shippingAddressLine2">Address line 2 <span class="optional">(optional)</span></label>
+                    <input type="text" id="shippingAddressLine2" name="shippingAddressLine2" class="checkout-input" autocomplete="street-address-line2" />
+                    <label for="shippingCity">City</label>
+                    <input type="text" id="shippingCity" name="shippingCity" class="checkout-input" autocomplete="address-level2" />
+                    <label for="shippingState">State / Province</label>
+                    <input type="text" id="shippingState" name="shippingState" class="checkout-input" autocomplete="address-level1" />
+                    <label for="shippingPostalCode">Postal code</label>
+                    <input type="text" id="shippingPostalCode" name="shippingPostalCode" class="checkout-input" autocomplete="postal-code" />
+                    <label for="shippingCountry">Country</label>
+                    <input type="text" id="shippingCountry" name="shippingCountry" class="checkout-input" autocomplete="country-name" />
+                </div>
+                <div class="cart-footer" style="margin-top:20px;">
+                    <button type="submit" class="btn btn-primary" id="placeOrderBtn">Place Order</button>
+                </div>
+            </form>
+        </div>
+        <div id="checkoutEmpty" class="cart-empty" hidden>
+            <p>Your cart is empty.</p>
+            <a href="product-listing.html" class="nav-link">Browse products</a>
+            <p style="margin-top:12px;"><a href="cart.html" class="nav-link">View cart</a></p>
+        </div>
     </section>
 </main>
 
@@ -56,5 +95,7 @@
         <div>Email: info@fantasycardwerx.example • Phone: (555) 555-5555</div>
     </div>
 </footer>
+
+<script src="checkout.js" defer></script>
 </body>
 </html>

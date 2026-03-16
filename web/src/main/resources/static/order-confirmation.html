@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Fantasy CardWerx — Order Confirmation</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="cart.css" />
+</head>
+<body>
+<header class="site-header">
+    <div class="brand">
+        <a href="index.html" class="logo-link" aria-label="Fantasy CardWerx home">
+            <svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <rect x="4" y="8" width="56" height="48" rx="6" ry="6" />
+                <path d="M16 22h32M16 30h32M16 38h32" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </a>
+
+        <div class="title-block">
+            <a href="index.html" class="store-name-link">
+                <h1 class="store-name">Fantasy CardWerx</h1>
+            </a>
+            <div class="tagline">APJ Store — Order Confirmation</div>
+        </div>
+
+        <nav class="header-nav" aria-label="Main navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="product-listing.html" class="nav-link">Browse Products</a>
+            <a href="cart.html" class="nav-link">Cart</a>
+        </nav>
+    </div>
+</header>
+
+<main class="main cart-main">
+    <section class="cart-area">
+        <h2>Order Confirmation</h2>
+        <div id="confirmStatus" class="status">Loading…</div>
+        <div id="confirmContent" class="cart-content" hidden>
+            <p id="orderIdLine" class="order-id-line">Order ID: —</p>
+            <p id="orderStatusLine" class="order-status-line">Status: Processing…</p>
+            <div id="loadingIndicator" class="loading-indicator" aria-live="polite">
+                Waiting for payment processing…
+            </div>
+            <div id="orderComplete" class="order-complete" hidden>
+                <p class="order-complete-msg">Order Complete</p>
+            </div>
+        </div>
+        <div id="confirmError" class="cart-empty" hidden>
+            <p>Order not found or invalid order ID.</p>
+            <a href="index.html" class="nav-link">Return to home</a>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div>Fantasy CardWerx</div>
+        <div>1234 Mockingbird Lane • Boise, ID</div>
+        <div>Email: info@fantasycardwerx.example • Phone: (555) 555-5555</div>
+    </div>
+</footer>
+
+<script src="order-confirmation.js" defer></script>
+</body>
+</html>

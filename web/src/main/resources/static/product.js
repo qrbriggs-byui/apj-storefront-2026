@@ -77,6 +77,17 @@ document.addEventListener('DOMContentLoaded', () => {
             contributionEl.textContent = contribution ? `Contribution: ${contribution}` : 'Contribution: —';
             priceEl.textContent = price != null ? formatPrice(price) : '—';
 
+            // Populate Add to Cart form
+            const form = document.getElementById('addToCartForm');
+            if (form) {
+                const formProductId = document.getElementById('formProductId');
+                const formProductName = document.getElementById('formProductName');
+                const formPrice = document.getElementById('formPrice');
+                if (formProductId) formProductId.value = String(item.id ?? '');
+                if (formProductName) formProductName.value = String(title ?? '');
+                if (formPrice) formPrice.value = price != null ? String(Number(price)) : '0';
+            }
+
             // media: show full native 200x280 image whenever possible
             mediaEl.innerHTML = '';
             if (imageUrl) {

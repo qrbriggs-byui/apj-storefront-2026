@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Fantasy CardWerx — Featured Cards</title>
+    <title>Fantasy CardWerx — Cart</title>
 
-    <!-- Roboto from Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="cart.css" />
 </head>
 <body>
 <header class="site-header">
@@ -25,31 +25,43 @@
             <a href="index.html" class="store-name-link">
                 <h1 class="store-name">Fantasy CardWerx</h1>
             </a>
-            <div class="tagline">APJ Store — Curated trading cards & collectibles</div>
+            <div class="tagline">APJ Store — Your cart</div>
         </div>
 
         <nav class="header-nav" aria-label="Main navigation">
             <a href="index.html" class="nav-link">Home</a>
             <a href="product-listing.html" class="nav-link">Browse Products</a>
-            <a href="cart.html" class="nav-link">Cart</a>
+            <a href="cart.html" class="nav-link active">Cart</a>
         </nav>
-
-        <form id="searchForm" class="search-form" role="search" aria-label="Search products">
-            <input id="searchInput" class="search-input" type="search" name="q" placeholder="Search cards, specialty, contributor..." autocomplete="off" />
-            <button class="search-btn" type="submit">Search</button>
-        </form>
     </div>
 </header>
 
-<main class="main">
-    <section class="hero">
-        <h2>Featured Cards</h2>
-        <p class="lead">Hand-picked favorites from the APJ collection — fetched live.</p>
-    </section>
-
-    <section id="featured" class="cards-section" aria-live="polite">
-        <div id="status" class="status">Loading featured cards…</div>
-        <div id="cards" class="cards-grid" hidden></div>
+<main class="main cart-main">
+    <section class="cart-area">
+        <h2>Your Cart</h2>
+        <div id="cartStatus" class="status">Loading cart…</div>
+        <div id="cartContent" class="cart-content" hidden>
+            <table class="cart-table" aria-label="Cart items">
+                <thead>
+                    <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Qty</th>
+                        <th scope="col">Total</th>
+                        <th scope="col"><span class="sr-only">Actions</span></th>
+                    </tr>
+                </thead>
+                <tbody id="cartTableBody"></tbody>
+            </table>
+            <div class="cart-footer">
+                <p id="cartTotal" class="cart-total">Total: $0.00</p>
+                <a id="checkoutBtn" href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
+            </div>
+        </div>
+        <div id="cartEmpty" class="cart-empty" hidden>
+            <p>Your cart is empty.</p>
+            <a href="product-listing.html" class="nav-link">Browse products</a>
+        </div>
     </section>
 </main>
 
@@ -61,6 +73,6 @@
     </div>
 </footer>
 
-<script src="index.js" defer></script>
+<script src="cart.js" defer></script>
 </body>
 </html>

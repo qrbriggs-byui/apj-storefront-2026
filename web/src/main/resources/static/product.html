@@ -32,6 +32,7 @@
         <nav class="header-nav" aria-label="Main navigation">
             <a href="index.html" class="nav-link">Home</a>
             <a href="product-listing.html" class="nav-link">Browse Products</a>
+            <a href="cart.html" class="nav-link">Cart</a>
         </nav>
 
         <form id="searchFormP" class="search-form" role="search" aria-label="Search products">
@@ -73,6 +74,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        <form id="addToCartForm" class="add-to-cart-form" action="/cart/add" method="post" style="margin-top:12px;">
+                            <input type="hidden" name="productId" id="formProductId" value="" />
+                            <input type="hidden" name="productName" id="formProductName" value="" />
+                            <input type="hidden" name="price" id="formPrice" value="0" />
+                            <label for="formQuantity" class="sr-only">Quantity</label>
+                            <input type="number" id="formQuantity" name="quantity" min="1" value="1" class="qty-input" aria-label="Quantity" />
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
 
                         <!-- No description field in model; intentionally omitted -->
                     </div>

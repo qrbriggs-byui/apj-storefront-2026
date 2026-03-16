@@ -1,0 +1,142 @@
+/* cart.css - Cart page styling */
+
+.cart-main {
+    max-width: var(--max-width, 900px);
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+
+.cart-area h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: var(--primary, #628395);
+}
+
+.cart-content {
+    background: #fff;
+    border-radius: var(--radius, 10px);
+    box-shadow: var(--card-shadow, 0 6px 18px rgba(48,48,48,0.08));
+    padding: 20px;
+    overflow-x: auto;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.cart-table th {
+    font-weight: 600;
+    color: var(--secondary, #96897b);
+}
+
+.cart-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-item-qty input {
+    width: 60px;
+    padding: 6px 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.cart-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.cart-total {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.cart-empty {
+    text-align: center;
+    padding: 48px 24px;
+    background: #fff;
+    border-radius: var(--radius, 10px);
+    box-shadow: var(--card-shadow, 0 6px 18px rgba(48,48,48,0.08));
+}
+
+.cart-empty p {
+    margin: 0 0 12px 0;
+}
+
+/* Add to cart form on product page */
+.add-to-cart-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-to-cart-form .qty-input {
+    width: 70px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.add-to-cart-form .btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    background: var(--primary, #628395);
+    color: #fff;
+}
+
+.add-to-cart-form .btn:hover {
+    background: var(--secondary, #96897b);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.cart-item-remove {
+    background: transparent;
+    border: 1px solid #ccc;
+    color: #666;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.cart-item-remove:hover {
+    background: #f5f5f5;
+    color: #c00;
+}

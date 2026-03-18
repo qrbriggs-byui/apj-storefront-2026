@@ -157,7 +157,7 @@ You may choose either:
 - load carts, log them, then delete in batch
 
 For teaching clarity, deleting after loading them individually is often easier to explain because students can clearly see each deleted cart in the logs.
-
+* Decision: load carts first, log each and delete one by one
 ---
 
 ## 5.3 Service Layer
@@ -244,6 +244,7 @@ POST /api/internal/cart-cleanup?maxAgeMinutes=30
 ```
 
 For teaching simplicity, a query parameter is easiest.
+* Decision: Use option A
 
 Response example:
 
@@ -380,6 +381,8 @@ You could place this in a dedicated helper such as:
 But for teaching simplicity, it can also be logged directly in the scheduled job.
 
 If you want one extra teaching step, you could also write the report to a text file later, but logging is enough for the initial implementation plan.
+
+* Decision: Just write to console for simplicity.
 
 ---
 
@@ -525,8 +528,8 @@ A good classroom demonstration would be:
 4. Set:
 
 ```properties
-cart.cleanup.max-age-minutes=30
-cart.cleanup.fixed-delay-ms=15000
+cart.cleanup.max-age-minutes=5
+cart.cleanup.fixed-delay-ms=60000
 ```
 
 5. Wait for the job to run.
@@ -540,32 +543,7 @@ This makes the concept of scheduled jobs concrete and visible.
 
 ---
 
-# 13. Testing Ideas
-
-## Unit Tests
-
-### db module
-
-- cleanup finds only carts older than the cutoff
-- cleanup deletes the right carts
-- cleanup returns the correct removed count
-
-### work module
-
-- scheduled job calls the client with configured `maxAgeMinutes`
-- report logging uses returned response data
-- exceptions are handled without crashing the app
-
-## Integration Tests
-
-- create carts with old and recent timestamps
-- invoke cleanup endpoint
-- verify only old carts are removed
-- verify response count matches deleted rows
-
----
-
-# 14. Concepts This Module Teaches
+# 13. Concepts This Module Teaches
 
 Module 3 should help students understand:
 
@@ -585,7 +563,7 @@ It also builds naturally on the first two modules:
 
 ---
 
-# 15. Summary
+# 14. Summary
 
 This module introduces a dedicated **`work`** module that runs a scheduled cart cleanup job.
 

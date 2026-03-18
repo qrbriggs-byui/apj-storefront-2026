@@ -1,6 +1,15 @@
 package edu.byui.apj.storefront.db.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import edu.byui.apj.storefront.db.model.Cart;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CartRepository extends JpaRepository<Cart, Long> {}
+import java.time.Instant;
+import java.util.List;
+
+public interface CartRepository extends JpaRepository<Cart, Long> {
+
+    /**
+     * Find carts created before the given cutoff time (for cleanup of expired carts).
+     */
+    List<Cart> findByCreatedAtBefore(Instant cutoff);
+}

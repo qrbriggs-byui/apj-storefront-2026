@@ -57,5 +57,6 @@
         <module>db</module>
         <module>api-mongo</module>
         <module>work</module>
+        <module>jms</module>
     </modules>
 </project>

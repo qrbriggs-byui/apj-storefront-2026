@@ -1,6 +1,7 @@
 package edu.byui.apj.storefront.db.controller;
 
 import edu.byui.apj.storefront.db.controller.dto.CreateOrderRequest;
+import edu.byui.apj.storefront.db.controller.dto.OrderDetailsResponse;
 import edu.byui.apj.storefront.db.controller.dto.OrderStatusResponse;
 import edu.byui.apj.storefront.db.model.Order;
 import edu.byui.apj.storefront.db.model.OrderStatus;
@@ -28,5 +29,10 @@ public class OrderController {
     public ResponseEntity<OrderStatusResponse> getOrderStatus(@PathVariable Long orderId) {
         Order order = orderService.getOrder(orderId);
         return ResponseEntity.ok(new OrderStatusResponse(order.getId(), order.getStatus()));
+    }
+
+    @GetMapping("/{orderId}/details")
+    public ResponseEntity<OrderDetailsResponse> getOrderDetails(@PathVariable Long orderId) {
+        return ResponseEntity.ok(orderService.getOrderDetails(orderId));
     }
 }

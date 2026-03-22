@@ -91,6 +91,36 @@ body{
 .nav-link:hover{ background: rgba(255,255,255,0.06); }
 .nav-link.active{ background: rgba(255,255,255,0.09); }
 
+.account-nav{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+.nav-link.account-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+}
+.account-icon{
+    width:1.25rem;
+    height:1.25rem;
+    flex-shrink:0;
+}
+.account-label{ line-height:1; }
+
+.nav-link-btn{
+    background:transparent;
+    border:none;
+    font:inherit;
+    color: rgba(255,255,255,0.95);
+    font-weight:500;
+    padding:6px 8px;
+    border-radius:8px;
+    cursor:pointer;
+}
+.nav-link-btn:hover{ background: rgba(255,255,255,0.06); }
+
 .search-form{
     display:flex;
     align-items:center;
@@ -117,6 +147,51 @@ body{
 
 /* Main */
 .main{max-width:var(--max-width); margin:28px auto; padding:0 16px;}
+
+/* Auth + profile forms (static pages) */
+.auth-panel{
+    max-width:420px;
+    margin:24px auto;
+    padding:20px;
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow: var(--card-shadow);
+}
+.auth-panel h2{ margin-top:0; color:var(--primary); }
+.auth-panel label{ display:block; margin:12px 0 4px; font-weight:500; }
+.auth-panel input{
+    width:100%;
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:1rem;
+}
+.auth-actions{ margin-top:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.auth-submit{
+    padding:10px 16px;
+    border-radius:8px;
+    border:none;
+    background:var(--accent);
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+}
+.auth-error{ color:#b00020; margin:8px 0 0; font-size:0.9rem; }
+.auth-links a{ color:var(--primary); font-weight:500; }
+
+.profile-actions{
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid rgba(0,0,0,0.08);
+}
+.profile-logout-form{ margin:0; }
+.profile-logout-btn{
+    background:var(--secondary);
+}
+.profile-logout-btn:hover{
+    filter:brightness(0.95);
+}
+
 .hero h2{margin:0 0 6px; color:var(--primary); font-size:1.6rem;}
 .hero .lead{margin:0 0 18px; color:var(--secondary)}
 

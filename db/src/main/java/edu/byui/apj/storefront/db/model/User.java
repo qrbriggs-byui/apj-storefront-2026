@@ -13,7 +13,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String username;
+
+    /** BCrypt hash only — never expose in API responses. */
+    @Column(name = "password_hash", nullable = false, length = 255)
+    private String passwordHash;
 
     @OneToOne(cascade = {}, orphanRemoval = true)
     @JoinColumn(name = "profile_id", unique = true)

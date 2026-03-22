@@ -4,14 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Fantasy CardWerx — Featured Cards</title>
-
-    <!-- Roboto from Google Fonts -->
+    <title>Fantasy CardWerx — Log in</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="index.css" />
 </head>
 <body>
@@ -23,14 +18,12 @@
                 <path d="M16 22h32M16 30h32M16 38h32" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
             </svg>
         </a>
-
         <div class="title-block">
             <a href="index.html" class="store-name-link">
                 <h1 class="store-name">Fantasy CardWerx</h1>
             </a>
-            <div class="tagline">APJ Store — Curated trading cards & collectibles</div>
+            <div class="tagline">APJ Store — Sign in</div>
         </div>
-
         <nav class="header-nav" aria-label="Main navigation">
             <a href="index.html" class="nav-link">Home</a>
             <a href="product-listing.html" class="nav-link">Browse Products</a>
@@ -44,23 +37,23 @@
                 </a>
             </span>
         </nav>
-
-        <form id="searchForm" class="search-form" role="search" aria-label="Search products">
-            <input id="searchInput" class="search-input" type="search" name="q" placeholder="Search cards, specialty, contributor..." autocomplete="off" />
-            <button class="search-btn" type="submit">Search</button>
-        </form>
     </div>
 </header>
 
 <main class="main">
-    <section class="hero">
-        <h2>Featured Cards</h2>
-        <p class="lead">Hand-picked favorites from the APJ collection — fetched live.</p>
-    </section>
-
-    <section id="featured" class="cards-section" aria-live="polite">
-        <div id="status" class="status">Loading featured cards…</div>
-        <div id="cards" class="cards-grid" hidden></div>
+    <section class="auth-panel">
+        <h2>Log in</h2>
+        <p id="loginError" class="auth-error" hidden>Invalid username or password.</p>
+        <form method="post" action="/auth/login">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username" required />
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+            <div class="auth-actions">
+                <button type="submit" class="auth-submit">Sign in</button>
+                <span class="auth-links"><a href="register.html">Create an account</a></span>
+            </div>
+        </form>
     </section>
 </main>
 
@@ -68,10 +61,15 @@
     <div class="footer-inner">
         <div>Fantasy CardWerx</div>
         <div>1234 Mockingbird Lane • Boise, ID</div>
-        <div>Email: info@fantasycardwerx.example • Phone: (555) 555-5555</div>
     </div>
 </footer>
-
-<script src="index.js" defer></script>
+<script>
+(function () {
+  if (new URLSearchParams(location.search).get("error") === "1") {
+    var e = document.getElementById("loginError");
+    if (e) e.hidden = false;
+  }
+})();
+</script>
 </body>
 </html>

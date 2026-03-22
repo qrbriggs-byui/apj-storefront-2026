@@ -5,9 +5,14 @@ import edu.byui.apj.storefront.db.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Seeds demo products and one customer account. Demo password is {@code password}
+ * (BCrypt-hashed below — never store plaintext in the database).
+ */
 @Component
 public class DataSeeder implements CommandLineRunner {
 
@@ -17,15 +22,18 @@ public class DataSeeder implements CommandLineRunner {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final UserProfileRepository userProfileRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public DataSeeder(UserRepository userRepository,
                       ProductRepository productRepository,
                       CategoryRepository categoryRepository,
-                      UserProfileRepository userProfileRepository) {
+                      UserProfileRepository userProfileRepository,
+                      PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.userProfileRepository = userProfileRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -36,24 +44,20 @@ public class DataSeeder implements CommandLineRunner {
             return;
         }
 
-        // OneToOne: User ↔ UserProfile
-        User u1 = new User();
-        u1.setUsername("jane.doe");
+        // OneToOne: User ↔ UserProfile (persist profile first, then attach user with BCrypt hash)
         UserProfile p1 = new UserProfile();
         p1.setFirstName("Jane");
         p1.setLastName("Doe");
-        u1.setProfile(p1);
-        userRepository.save(u1);
-        userProfileRepository.save(p1);
+        p1.setShippingZip("83440");
+        p1 = userProfileRepository.save(p1);
 
-        User u2 = new User();
-        u2.setUsername("john.smith");
-        UserProfile p2 = new UserProfile();
-        p2.setFirstName("John");
-        p2.setLastName("Smith");
-        u2.setProfile(p2);
-        userRepository.save(u2);
-        userProfileRepository.save(p2);
+        User u1 = new User();
+        u1.setUsername("jane.doe");
+        u1.setPasswordHash(passwordEncoder.encode("password"));
+        u1.setProfile(p1);
+        u1 = userRepository.save(u1);
+        p1.setUser(u1);
+        userProfileRepository.save(p1);
 
         // ManyToMany: Product ↔ Category
         Category electronics = new Category(); electronics.setName("Electronics");

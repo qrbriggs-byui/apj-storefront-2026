@@ -1,4 +1,11 @@
 package edu.byui.apj.storefront.db.repository;
+
 import edu.byui.apj.storefront.db.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-public interface UserRepository extends JpaRepository<User, Long> {}
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByUsername(String username);
+}

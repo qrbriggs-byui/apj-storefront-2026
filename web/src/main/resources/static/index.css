@@ -91,6 +91,20 @@ body{
 .nav-link:hover{ background: rgba(255,255,255,0.06); }
 .nav-link.active{ background: rgba(255,255,255,0.09); }
 
+.nav-account{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+}
+.nav-account-icon{
+    display:block;
+    flex-shrink:0;
+    opacity:0.95;
+}
+.nav-account-text{
+    font-weight:500;
+}
+
 .search-form{
     display:flex;
     align-items:center;
@@ -281,6 +295,104 @@ body{
     background:var(--primary);
     color:#fff;
     font-weight:700;
+}
+
+/* Auth + profile (shared) */
+.auth-main,
+.profile-main{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding-top:24px;
+    padding-bottom:48px;
+}
+.auth-card,
+.profile-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--card-shadow);
+    padding:24px 28px;
+    max-width:420px;
+    width:100%;
+}
+.auth-card h2,
+.profile-card h2{
+    margin:0 0 12px;
+    color:var(--primary);
+    font-size:1.35rem;
+}
+.auth-hint,
+.profile-note{
+    margin:0 0 18px;
+    font-size:0.92rem;
+    color:#555;
+}
+.auth-form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+.auth-label{
+    font-weight:600;
+    font-size:0.88rem;
+    color:#333;
+}
+.auth-input{
+    padding:10px 12px;
+    border-radius:8px;
+    border:1px solid rgba(0,0,0,0.12);
+    font-size:1rem;
+}
+.auth-input:focus{
+    outline:3px solid rgba(98,131,149,0.25);
+    border-color:var(--primary);
+}
+.auth-submit{
+    margin-top:8px;
+    padding:10px 16px;
+    border:none;
+    border-radius:8px;
+    background:var(--primary);
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+}
+.auth-submit:hover{ filter:brightness(1.05); }
+.auth-footer{
+    margin:18px 0 0;
+    font-size:0.92rem;
+}
+.auth-footer-link{
+    color:var(--primary);
+    font-weight:600;
+    text-decoration:none;
+}
+.auth-footer-link:hover{ text-decoration:underline; }
+.profile-dl{
+    margin:0;
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:8px 16px;
+    align-items:baseline;
+}
+.profile-dl dt{
+    margin:0;
+    font-weight:600;
+    color:var(--secondary);
+}
+.profile-dl dd{
+    margin:0;
+}
+.profile-error{
+    color:#a33;
+    font-size:0.92rem;
+    margin-top:12px;
+}
+.profile-logout-form{
+    margin-top:20px;
+}
+.profile-logout-btn{
+    background:var(--secondary);
 }
 
 /* Utilities & responsive tweaks */

@@ -3,16 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <title>Fantasy CardWerx — Order Confirmation</title>
-
+    <title>My profile — Fantasy CardWerx</title>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="cart.css" />
 </head>
 <body>
 <header class="site-header">
@@ -23,19 +17,17 @@
                 <path d="M16 22h32M16 30h32M16 38h32" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
             </svg>
         </a>
-
         <div class="title-block">
             <a href="index.html" class="store-name-link">
                 <h1 class="store-name">Fantasy CardWerx</h1>
             </a>
-            <div class="tagline">APJ Store — Order Confirmation</div>
+            <div class="tagline">Your account</div>
         </div>
-
         <nav class="header-nav" aria-label="Main navigation">
             <a href="index.html" class="nav-link">Home</a>
             <a href="product-listing.html" class="nav-link">Browse Products</a>
             <a href="cart.html" class="nav-link">Cart</a>
-            <a href="profile.html" class="nav-link nav-account" aria-label="Account">
+            <a href="profile.html" class="nav-link nav-account active" aria-current="page" aria-label="Account">
                 <svg class="nav-account-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20">
                     <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
@@ -45,35 +37,50 @@
     </div>
 </header>
 
-<main class="main cart-main">
-    <section class="cart-area">
-        <h2>Order Confirmation</h2>
-        <div id="confirmStatus" class="status">Loading…</div>
-        <div id="confirmContent" class="cart-content" hidden>
-            <p id="orderIdLine" class="order-id-line">Order ID: —</p>
-            <p id="orderStatusLine" class="order-status-line">Status: Processing…</p>
-            <div id="loadingIndicator" class="loading-indicator" aria-live="polite">
-                Waiting for payment processing…
-            </div>
-            <div id="orderComplete" class="order-complete" hidden>
-                <p class="order-complete-msg">Order Complete</p>
-            </div>
-        </div>
-        <div id="confirmError" class="cart-empty" hidden>
-            <p>Order not found or invalid order ID.</p>
-            <a href="index.html" class="nav-link">Return to home</a>
-        </div>
+<main class="main profile-main">
+    <section class="profile-card" aria-labelledby="profile-title">
+        <h2 id="profile-title">Profile</h2>
+        <p class="profile-note">This page is read-only for this milestone.</p>
+        <dl class="profile-dl">
+            <dt>Name</dt>
+            <dd id="profileName">Loading…</dd>
+            <dt>Zip code</dt>
+            <dd id="profileZip">Loading…</dd>
+        </dl>
+        <p id="profileError" class="profile-error" hidden></p>
+        <form method="post" action="/logout" class="profile-logout-form">
+            <button type="submit" class="auth-submit profile-logout-btn">Log out</button>
+        </form>
     </section>
 </main>
 
 <footer class="site-footer">
     <div class="footer-inner">
         <div>Fantasy CardWerx</div>
-        <div>1234 Mockingbird Lane • Boise, ID</div>
-        <div>Email: info@fantasycardwerx.example • Phone: (555) 555-5555</div>
     </div>
 </footer>
 
-<script src="order-confirmation.js" defer></script>
+<script>
+(function () {
+    const nameEl = document.getElementById("profileName");
+    const zipEl = document.getElementById("profileZip");
+    const errEl = document.getElementById("profileError");
+    fetch("/api/me/profile", { credentials: "same-origin" })
+        .then(function (r) {
+            if (!r.ok) throw new Error("Could not load profile.");
+            return r.json();
+        })
+        .then(function (data) {
+            nameEl.textContent = data.name || "—";
+            zipEl.textContent = data.zipCode || "—";
+        })
+        .catch(function () {
+            errEl.hidden = false;
+            errEl.textContent = "Unable to load profile. Try refreshing the page.";
+            nameEl.textContent = "—";
+            zipEl.textContent = "—";
+        });
+})();
+</script>
 </body>
 </html>

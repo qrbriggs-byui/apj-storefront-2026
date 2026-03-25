@@ -1,6 +1,7 @@
 package edu.byui.apj.storefront.web.controller;
 
 import edu.byui.apj.storefront.web.model.OrderStatusResponse;
+import edu.byui.apj.storefront.web.security.WebSessionKeys;
 import edu.byui.apj.storefront.web.service.CartClientService;
 import edu.byui.apj.storefront.web.service.OrderClientService;
 import jakarta.servlet.http.HttpSession;
@@ -45,12 +46,17 @@ public class CheckoutController {
         if (cartId == null) {
             return "redirect:/cart.html";
         }
+        String jwt = (String) session.getAttribute(WebSessionKeys.DB_JWT);
+        if (jwt == null || jwt.isBlank()) {
+            return "redirect:/login.html";
+        }
+        String finalJwt = jwt;
         String redirect = orderClientService.createOrder(cartId,
                         customerName, customerEmail,
                         shippingAddressLine1, shippingAddressLine2,
                         shippingCity, shippingState, shippingPostalCode, shippingCountry)
                 .map(r -> {
-                    cartClientService.createCart().ifPresent(newCartId ->
+                    cartClientService.createCart(finalJwt).ifPresent(newCartId ->
                             session.setAttribute(SESSION_CART_ID, newCartId));
                     return "redirect:/order-confirmation.html?orderId=" + r.orderId();
                 })

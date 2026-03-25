@@ -66,3 +66,12 @@
 .product-meta-compact .meta-row {
     margin-bottom: 10px;
 }
+
+/* Shown when the user is not logged in (cart requires authentication) */
+.btn-disabled-add-cart {
+    background: #d8d8d8;
+    color: #555;
+    border: 1px solid #bbb;
+    cursor: not-allowed;
+    opacity: 0.9;
+}

@@ -35,7 +35,7 @@
         <nav class="header-nav" aria-label="Main navigation">
             <a href="index.html" class="nav-link">Home</a>
             <a href="product-listing.html" class="nav-link">Browse Products</a>
-            <a href="cart.html" class="nav-link">Cart</a>
+            <a href="cart.html" class="nav-link nav-cart" hidden aria-hidden="true">Cart</a>
             <a href="profile.html" class="nav-link nav-account" aria-label="Account">
                 <svg class="nav-account-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="20" height="20">
                     <path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
@@ -84,6 +84,7 @@
                             </div>
                         </div>
 
+                        <div id="addToCartWrapAuth" class="add-to-cart-wrap" hidden>
                         <form id="addToCartForm" class="add-to-cart-form" action="/cart/add" method="post" style="margin-top:12px;">
                             <input type="hidden" name="productId" id="formProductId" value="" />
                             <input type="hidden" name="productName" id="formProductName" value="" />
@@ -92,6 +93,10 @@
                             <input type="number" id="formQuantity" name="quantity" min="1" value="1" class="qty-input" aria-label="Quantity" />
                             <button type="submit" class="btn btn-primary">Add to Cart</button>
                         </form>
+                        </div>
+                        <div id="addToCartWrapAnon" class="add-to-cart-wrap" hidden>
+                            <button type="button" disabled class="btn btn-disabled-add-cart" style="margin-top:12px;">Log in to enable cart</button>
+                        </div>
 
                         <!-- No description field in model; intentionally omitted -->
                     </div>
@@ -109,6 +114,7 @@
     </div>
 </footer>
 
+<script src="header-auth.js" defer></script>
 <script src="product.js" defer></script>
 </body>
 </html>

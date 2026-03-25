@@ -63,6 +63,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = await resp.json();
             console.debug('product.js: loaded item', item);
 
+            let session = { authenticated: false };
+            try {
+                const sResp = await fetch('/api/me/session', {
+                    credentials: 'same-origin',
+                    headers: { Accept: 'application/json' }
+                });
+                if (sResp.ok) {
+                    session = await sResp.json();
+                }
+            } catch (e) {
+                console.warn('product.js: session check failed', e);
+            }
+
+            const wrapAuth = document.getElementById('addToCartWrapAuth');
+            const wrapAnon = document.getElementById('addToCartWrapAnon');
+            if (wrapAuth && wrapAnon) {
+                if (session && session.authenticated === true) {
+                    wrapAuth.hidden = false;
+                    wrapAnon.hidden = true;
+                } else {
+                    wrapAuth.hidden = true;
+                    wrapAnon.hidden = false;
+                }
+            }
+
             // The Card model (server) uses these exact fields: imageUrl, specialty, contribution.
             // Map them directly.
             const title = item.name ?? 'Untitled Card';
